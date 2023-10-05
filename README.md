@@ -2,7 +2,22 @@ This is a test task to pass interviewing.
 
 # Installation
 
-1) install composer dependencies https://laravel.com/docs/10.x/sail#installing-composer-dependencies-for-existing-projects
+1) clone repo
+```
+git clone https://github.com/graceman9/test-lumen-rest-api-2023.git
+```
+
+2) cd into cloned folder
+```
+cd test-lumen-rest-api-2023
+```
+
+3) copy .env.example to .env and fill it with values
+```
+cp .env.example .env
+```
+
+4) install composer dependencies https://laravel.com/docs/10.x/sail#installing-composer-dependencies-for-existing-projects
 ```
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -12,19 +27,17 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-2) copy .env.example to .env and fill it with values
-
-3) run sail
+5) run sail
 ```
 ./vendor/bin/sail up -d 
 ```
 
-4) migrate db
+6) migrate db
 ```
 ./vendor/bin/sail artisan migrate
 ```
 
-5) seed db
+7) seed db
 ```
 ./vendor/bin/sail artisan db:seed
 ```
