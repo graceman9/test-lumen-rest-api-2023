@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "22b25b2d-b375-4081-8152-d698a842936d",
+		"name": "test-lumen-rest-api-2023",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "56979",
+		"_collection_link": "https://grey-capsule-83332.postman.co/workspace/Work-23~083b200a-1396-471c-8997-187f4c62711c/collection/56979-22b25b2d-b375-4081-8152-d698a842936d?action=share&source=collection_link&creator=56979"
+	},
+	"item": [
+		{
+			"name": "user register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"First\",\n    \"last_name\": \"Last\",\n    \"email\": \"first.last@gmail.com\",\n    \"password\": \"123\",\n    \"phone\": \"123456789\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/user/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user recover-password",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"first.last@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/user/recover-password",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"recover-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user sign-in",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"first.last@gmail.com\",\n    \"password\": \"123\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/user/sign-in",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categories all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDEvYXBpL3VzZXIvc2lnbi1pbiIsImlhdCI6MTY5NjQ2NDUxNCwiZXhwIjoxNjk2NDY4MTE0LCJuYmYiOjE2OTY0NjQ1MTQsImp0aSI6InBlaWc1aDVWVmJJNHI0ejciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Az1_lUqnd_F1we5GhJSO8pKRb0ymX4bFiblTqwqZL4U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/user/companies",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categories create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDEvYXBpL3VzZXIvc2lnbi1pbiIsImlhdCI6MTY5NjQ2NDUxNCwiZXhwIjoxNjk2NDY4MTE0LCJuYmYiOjE2OTY0NjQ1MTQsImp0aSI6InBlaWc1aDVWVmJJNHI0ejciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Az1_lUqnd_F1we5GhJSO8pKRb0ymX4bFiblTqwqZL4U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Api-Token",
+						"value": "birds fly south",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"{{$randomCompanyName}}\",\n    \"phone\": \"{{$randomPhoneNumber}}\",\n    \"description\": \"{{$randomLoremParagraph}}\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/user/companies",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost",
+			"type": "string"
+		}
+	]
+}
