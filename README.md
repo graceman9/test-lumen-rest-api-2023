@@ -12,7 +12,7 @@ git clone https://github.com/graceman9/test-lumen-rest-api-2023.git
 cd test-lumen-rest-api-2023
 ```
 
-3) copy .env.example to .env and fill it with values
+3) copy .env.example to .env and **fill it with values !**
 ```
 cp .env.example .env
 ```
