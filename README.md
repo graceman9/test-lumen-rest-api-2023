@@ -1,4 +1,4 @@
-This is a test task to pass interviewing.
+This is a test task for passing an interview.
 
 # Installation
 
