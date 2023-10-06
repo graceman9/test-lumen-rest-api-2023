@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Contracts\Service\MailServiceInterface;
-use App\Services\MailService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -43,13 +41,13 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \App\Contracts\Service\AuthServiceInterface::class,
-            \App\Services\AuthService::class,
+            \App\Contracts\Service\MailServiceInterface::class,
+            \App\Services\MailService::class,
         );
 
         $this->app->bind(
-            \App\Contracts\Service\MailServiceInterface::class,
-            \App\Services\MailService::class,
+            \App\Contracts\Service\AuthServiceInterface::class,
+            \App\Services\AuthService::class,
         );
     }
 }

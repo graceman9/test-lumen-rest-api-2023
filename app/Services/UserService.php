@@ -24,6 +24,7 @@ class UserService implements UserServiceInterface
         return $this->repository->create($userData);
     }
 
+    // FIXME: maybe create a signle auth service to handle this, mails and verification token..
     public function updatePasswordByToken(VerificationToken $verificationToken, string $password): void
     {
         $user = $this->repository->findById($verificationToken->user_id);

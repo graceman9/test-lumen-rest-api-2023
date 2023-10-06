@@ -2,22 +2,18 @@
 
 namespace App\Services;
 
-use App\Contracts\Repository\VerificationTokenRepositoryInterface;
 use App\Contracts\Service\AuthServiceInterface;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
+// FIXME: move logic from controller to this service, throw exceptions, maybe get rid of User, Mail and VerificatinoToken services
 class AuthService implements AuthServiceInterface
 {
-    public function __construct(
-        protected VerificationTokenRepositoryInterface $verificationTokenRepository
-    ) {
+    public function __construct()
+    {
     }
 
-    public function makeVerificationToken(User $user): string
+    public function attemptSignIn(array $credentials)
     {
-        $token = bin2hex(random_bytes(16));
-        $this->verificationTokenRepository->updateOrCreate($user, $token);
-
-        return $token;
+        return Auth::attempt($credentials);
     }
 }

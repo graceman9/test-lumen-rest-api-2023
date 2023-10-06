@@ -19,8 +19,11 @@ class VerificationTokenService implements VerificationTokenServiceInterface
         return $this->repository->findByToken($token);
     }
 
-    public function updateOrCreate(User $user, string $token): VerificationToken
+    public function makeVerificationToken(User $user): string
     {
-        return $this->repository->updateOrCreate($user, $token);
+        $token = bin2hex(random_bytes(16));
+        $this->repository->updateOrCreate($user, $token);
+
+        return $token;
     }
 }

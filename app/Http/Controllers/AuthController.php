@@ -8,15 +8,14 @@ use App\Contracts\Service\UserServiceInterface;
 use App\Contracts\Service\VerificationTokenServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function __construct(
         protected UserServiceInterface $userService,
-        protected AuthServiceInterface $authService,
         protected MailServiceInterface $mailService,
-        protected VerificationTokenServiceInterface $verificationTokenService
+        protected VerificationTokenServiceInterface $verificationTokenService,
+        protected AuthServiceInterface $authService
     ) {
     }
 
@@ -33,6 +32,7 @@ class AuthController extends Controller
             'phone' => 'required|string',
         ]);
 
+        // FIXME: move app logic to service layer, use try cache here
         $user = $this->userService->findByEmail($validated['email']);
         if (!is_null($user)) {
             return response()->json(['message' => 'User already exists with this email'], 422);
@@ -57,7 +57,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        $token = $this->authService->makeVerificationToken($user);
+        $token = $this->verificationTokenService->makeVerificationToken($user);
         $this->mailService->sendRecovePasswordMail($user, $token);
 
         return response()->json(['message' => 'Check your email for the link to update your password'], 201);
@@ -93,7 +93,7 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $token = Auth::attempt($validated);
+        $token = $this->authService->attemptSignIn($validated);
         if (!$token) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
