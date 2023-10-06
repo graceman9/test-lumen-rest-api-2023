@@ -43,9 +43,44 @@
 			"response": []
 		},
 		{
+			"name": "user sign-in",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"first.last@gmail.com\",\n    \"password\": \"222\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/user/sign-in",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "user recover-password",
 			"request": {
-				"method": "PATCH",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -78,9 +113,9 @@
 			"response": []
 		},
 		{
-			"name": "user sign-in",
+			"name": "user recover-password/verify",
 			"request": {
-				"method": "POST",
+				"method": "PATCH",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -96,17 +131,18 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"first.last@gmail.com\",\n    \"password\": \"123\"\n}"
+					"raw": "{\n    \"verification_token\": \"e425a11ab5dc28883d8f7d6376d40223\",\n    \"new_password\": \"222\"\n}"
 				},
 				"url": {
-					"raw": "{{baseUrl}}/api/user/sign-in",
+					"raw": "{{baseUrl}}/api/user/recover-password/verify",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"api",
 						"user",
-						"sign-in"
+						"recover-password",
+						"verify"
 					]
 				}
 			},
@@ -120,7 +156,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDEvYXBpL3VzZXIvc2lnbi1pbiIsImlhdCI6MTY5NjQ2NDUxNCwiZXhwIjoxNjk2NDY4MTE0LCJuYmYiOjE2OTY0NjQ1MTQsImp0aSI6InBlaWc1aDVWVmJJNHI0ejciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Az1_lUqnd_F1we5GhJSO8pKRb0ymX4bFiblTqwqZL4U",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDEvYXBpL3VzZXIvc2lnbi1pbiIsImlhdCI6MTY5NjU1NjIyMSwiZXhwIjoxNjk2NTU5ODIxLCJuYmYiOjE2OTY1NTYyMjEsImp0aSI6InNNNTlobE82M05tcnoyTjgiLCJzdWIiOiI0IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.QgZCkTgNJCO8dl1NfSWWrXSp8Ikc7BJhWs6eAIoc52g",
 							"type": "string"
 						}
 					]
@@ -155,7 +191,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDEvYXBpL3VzZXIvc2lnbi1pbiIsImlhdCI6MTY5NjQ2NDUxNCwiZXhwIjoxNjk2NDY4MTE0LCJuYmYiOjE2OTY0NjQ1MTQsImp0aSI6InBlaWc1aDVWVmJJNHI0ejciLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Az1_lUqnd_F1we5GhJSO8pKRb0ymX4bFiblTqwqZL4U",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDEvYXBpL3VzZXIvc2lnbi1pbiIsImlhdCI6MTY5NjU1NjIyMSwiZXhwIjoxNjk2NTU5ODIxLCJuYmYiOjE2OTY1NTYyMjEsImp0aSI6InNNNTlobE82M05tcnoyTjgiLCJzdWIiOiI0IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.QgZCkTgNJCO8dl1NfSWWrXSp8Ikc7BJhWs6eAIoc52g",
 							"type": "string"
 						}
 					]
