@@ -22,12 +22,7 @@ $router->group(['prefix' => 'api', 'namespace' => '\App\Http\Controllers'], func
     $router->post('user/register', 'AuthController@register');
     $router->post('user/sign-in', 'AuthController@signIn');
     $router->post('user/recover-password', 'AuthController@recoverPassword');
-
-
-    // $router->post('login', 'LumenAuthController@login');
-    // $router->post('logout', 'LumenAuthController@logout');
-    // $router->post('refresh', 'LumenAuthController@refresh');
-    // $router->post('me', 'LumenAuthController@me');
+    $router->patch('user/recover-password/verify', 'AuthController@recoverPasswordVerify');
 
     // private content
     $router->group(['middleware' => App\Http\Middleware\Authenticate::class], function () use ($router) {

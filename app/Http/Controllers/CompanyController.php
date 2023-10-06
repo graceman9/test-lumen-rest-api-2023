@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\CompanyServiceInterface;
+use App\Contracts\Service\CompanyServiceInterface;
 use App\Http\Resources\CompanyResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class CompanyController extends Controller
 
     public function index(): JsonResource
     {
-        $companies = $this->companyService->getAll(Auth::id());
+        $companies = $this->companyService->findByUser(Auth::user());
 
         return CompanyResource::collection($companies);
     }
@@ -41,7 +41,7 @@ class CompanyController extends Controller
         }
 
         $validated = $validator->validated();
-        $company = $this->companyService->create($validated, Auth::id());
+        $company = $this->companyService->create(Auth::user(), $validated);
 
         return response()->json($company, 201);
     }

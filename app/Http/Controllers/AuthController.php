@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Contracts\Service\AuthServiceInterface;
+use App\Contracts\Service\MailServiceInterface;
+use App\Contracts\Service\UserServiceInterface;
+use App\Contracts\Service\VerificationTokenServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(
+        protected UserServiceInterface $userService,
+        protected AuthServiceInterface $authService,
+        protected MailServiceInterface $mailService,
+        protected VerificationTokenServiceInterface $verificationTokenService
+    ) {
     }
 
     /**
@@ -26,12 +33,12 @@ class AuthController extends Controller
             'phone' => 'required|string',
         ]);
 
-        $user = User::where('email', $validated['email'])->first();
+        $user = $this->userService->findByEmail($validated['email']);
         if (!is_null($user)) {
             return response()->json(['message' => 'User already exists with this email'], 422);
         }
 
-        User::create($validated);
+        $user = $this->userService->create($validated);
 
         return response()->json(['message' => 'Successfully created user'], 201);
     }
@@ -45,16 +52,35 @@ class AuthController extends Controller
             'email' => 'required|string',
         ]);
 
-        $user = User::where('email', $validated['email'])->first();
-        if (!is_null($user)) {
+        $user = $this->userService->findByEmail($validated['email']);
+        if (is_null($user)) {
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        /**
-         * TODO!!!
-         */
+        $token = $this->authService->makeVerificationToken($user);
+        $this->mailService->sendRecovePasswordMail($user, $token);
 
-        return $this->respondWithToken($token);
+        return response()->json(['message' => 'Check your email for the link to update your password'], 201);
+    }
+
+    /**
+     * Verify recovery password.
+     */
+    public function recoverPasswordVerify(Request $request): JsonResponse
+    {
+        $validated = $this->validate($request, [
+            'verification_token' => 'required|string',
+            'new_password' => 'required|string',
+        ]);
+
+        $token = $this->verificationTokenService->findByToken($validated['verification_token']);
+        if (is_null($token)) {
+            return response()->json(['message' => 'Token not found'], 404);
+        }
+
+        $this->userService->updatePasswordByToken($token, $validated['new_password']);
+
+        return response()->json(['message' => 'You password successfully updated'], 200);
     }
 
     /**

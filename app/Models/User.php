@@ -10,6 +10,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -64,5 +65,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function companies(): HasMany
     {
         return $this->hasMany(Company::class);
+    }
+
+    public function verificationTokens(): HasOne
+    {
+        return $this->hasOne(VerificationToken::class);
     }
 }

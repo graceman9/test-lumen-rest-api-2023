@@ -2,19 +2,21 @@
 
 namespace App\Repositories;
 
-use App\Contracts\CompanyRepositoryInterface;
+use App\Contracts\Repository\CompanyRepositoryInterface;
 use App\Models\Company;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class CompanyRepository implements CompanyRepositoryInterface
 {
-    public function getAll(int $user_id): array
+    public function findByUser(User $user): Collection
     {
-        return Company::where(['user_id' => $user_id])->get()->all();
+        return Company::where(['user_id' => $user->id])->get();
     }
 
-    public function create(array $companyData, int $user_id): void
+    public function create(User $user, array $companyData): void
     {
-        $companyData['user_id'] = $user_id;
+        $companyData['user_id'] = $user->id;
         Company::create($companyData);
     }
 }

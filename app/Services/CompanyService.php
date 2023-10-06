@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
-use App\Contracts\CompanyRepositoryInterface;
-use App\Contracts\CompanyServiceInterface;
+use App\Contracts\Repository\CompanyRepositoryInterface;
+use App\Contracts\Service\CompanyServiceInterface;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class CompanyService implements CompanyServiceInterface
 {
@@ -12,13 +14,13 @@ class CompanyService implements CompanyServiceInterface
     ) {
     }
 
-    public function getAll(int $userId): array
+    public function findByUser(User $user): Collection
     {
-        return $this->companyRepository->getAll($userId);
+        return $this->companyRepository->findByUser($user);
     }
 
-    public function create(array $companyData, int $userId): void
+    public function create(User $user, array $companyData): void
     {
-        $this->companyRepository->create($companyData, $userId);
+        $this->companyRepository->create($user, $companyData);
     }
 }
