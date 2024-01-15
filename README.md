@@ -1,5 +1,7 @@
 This is a test task for passing an interview.
 
+The purpose of the code was to show the Repository/Service pattern.
+
 # Installation
 
 1) clone repo
